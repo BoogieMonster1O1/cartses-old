@@ -13,6 +13,12 @@ group = project.maven_group
 minecraft {
 }
 
+repositories {
+	mavenCentral()
+	maven { url "https://dl.bintray.com/shedaniel/shedaniel-mods" }
+	maven { url 'https://jitpack.io' }
+}
+
 dependencies {
 	//to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -20,6 +26,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
 }
 
 processResources {
