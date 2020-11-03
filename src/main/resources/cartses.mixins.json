@@ -2,7 +2,9 @@
   "required": true,
   "package": "io.github.boogiemonster1o1.cartses.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [],
+  "mixins": [
+    "AbstractMinecartEntityMixin"
+  ],
   "client": [],
   "server": [],
   "injectors": {

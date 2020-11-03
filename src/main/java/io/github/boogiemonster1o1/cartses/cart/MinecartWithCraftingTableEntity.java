@@ -1,9 +1,11 @@
 package io.github.boogiemonster1o1.cartses.cart;
 
 import com.chocohead.mm.api.ClassTinkerers;
+import io.github.boogiemonster1o1.cartses.networking.EntityPacketUtils;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
+import net.minecraft.network.Packet;
 import net.minecraft.world.World;
 
 @SuppressWarnings("EntityConstructor")
@@ -16,6 +18,11 @@ public class MinecartWithCraftingTableEntity extends AbstractMinecartEntity {
 
 	public MinecartWithCraftingTableEntity(EntityType<?> type, World world, double x, double y, double z) {
 		super(type, world, x, y, z);
+	}
+
+	@Override
+	public Packet<?> createSpawnPacket() {
+		return EntityPacketUtils.createPacket(this);
 	}
 
 	@Override

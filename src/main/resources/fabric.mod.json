@@ -19,7 +19,9 @@
     "mm:early_risers": [
       "io.github.boogiemonster1o1.cartses.EnumHackery"
     ],
-    "client": [],
+    "client": [
+      "io.github.boogiemonster1o1.cartses.networking.EntityPacketOnClient::initNetworking"
+    ],
     "server": []
   },
   "mixins": [
