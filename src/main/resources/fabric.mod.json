@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "cartses",
+  "version": "${version}",
+  "name": "Cartses",
+  "description": "Cartses",
+  "authors": [
+    "BoogieMonster1O1"
+  ],
+  "contributors": [],
+  "contact": {},
+  "license": "ISC",
+  "icon": "assets/cartses/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.boogiemonster1o1.cartses.Cartses"
+    ],
+    "client": [],
+    "server": []
+  },
+  "mixins": [
+    "cartses.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  }
+}
