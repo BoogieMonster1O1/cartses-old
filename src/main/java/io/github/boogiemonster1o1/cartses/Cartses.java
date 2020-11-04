@@ -15,7 +15,7 @@ public class Cartses implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		log(Level.INFO, "Initializing Cartses");
+		log(Level.INFO, "Initializing");
 		ModEntityTypes.init();
 		ModItems.init();
 	}

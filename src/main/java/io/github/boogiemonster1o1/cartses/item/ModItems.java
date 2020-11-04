@@ -17,7 +17,7 @@ public class ModItems {
 	@RegisterMe("minecart_with_crafting_table")
 	public static final Item MINECART_WITH_CRAFTING_TABLE = new MinecartItem(MinecartWithCraftingTableEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
 
-	@RegisterMe("minecart_with_crafting_table")
+	@RegisterMe("minecart_with_barrel")
 	public static final Item MINECART_WITH_BARREL = new MinecartItem(MinecartWithBarrelEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
 
 	public static void init() {

@@ -3,6 +3,7 @@ package io.github.boogiemonster1o1.cartses.entity.cart;
 import com.chocohead.mm.api.ClassTinkerers;
 import io.github.boogiemonster1o1.cartses.networking.EntityPacketUtils;
 
+import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -11,6 +12,7 @@ import net.minecraft.entity.vehicle.StorageMinecartEntity;
 import net.minecraft.network.Packet;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 @SuppressWarnings("EntityConstructor")
@@ -52,6 +54,6 @@ public class MinecartWithBarrelEntity extends StorageMinecartEntity {
 
 	@Override
 	public BlockState getDefaultContainedBlock() {
-		return Blocks.BARREL.getDefaultState();
+		return Blocks.BARREL.getDefaultState().with(BarrelBlock.FACING, Direction.UP);
 	}
 }
