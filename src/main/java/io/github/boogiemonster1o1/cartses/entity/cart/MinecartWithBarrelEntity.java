@@ -7,12 +7,14 @@ import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.vehicle.StorageMinecartEntity;
 import net.minecraft.network.Packet;
 import net.minecraft.screen.GenericContainerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
 @SuppressWarnings("EntityConstructor")
@@ -55,5 +57,13 @@ public class MinecartWithBarrelEntity extends StorageMinecartEntity {
 	@Override
 	public BlockState getDefaultContainedBlock() {
 		return Blocks.BARREL.getDefaultState().with(BarrelBlock.FACING, Direction.UP);
+	}
+
+	@Override
+	public void dropItems(DamageSource damageSource) {
+		super.dropItems(damageSource);
+		if (this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+			this.dropItem(Blocks.BARREL);
+		}
 	}
 }

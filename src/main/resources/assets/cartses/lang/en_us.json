@@ -1,5 +1,7 @@
 {
   "item.cartses.minecart_with_crafting_table": "Minecart with Crafting Table",
-  "item.cartses.minecart_with_barrel": "Minceart with Barrel",
+  "item.cartses.minecart_with_barrel": "Minecart with Barrel",
+  "item.cartses.minecart_with_glowstone": "Minecart with Glowstone",
+  "item.cartses.minecart_with_redstone_lamp": "Minecart with Redstone Lamp",
   "screenhandler.cartses.crafting": "Minecart with Crafting Table"
 }

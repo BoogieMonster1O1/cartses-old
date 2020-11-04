@@ -6,6 +6,8 @@ import io.github.boogiemonster1o1.cartses.Cartses;
 import io.github.boogiemonster1o1.cartses.RegisterMe;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithBarrelEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithCraftingTableEntity;
+import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithGlowstoneEntity;
+import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithRedstoneLampEntity;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -19,6 +21,12 @@ public class ModItems {
 
 	@RegisterMe("minecart_with_barrel")
 	public static final Item MINECART_WITH_BARREL = new MinecartItem(MinecartWithBarrelEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
+
+	@RegisterMe("minecart_with_glowstone")
+	public static final Item MINECART_WITH_GLOWSTONE = new MinecartItem(MinecartWithGlowstoneEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
+
+	@RegisterMe("minecart_with_redstone_lamp")
+	public static final Item MINECART_WITH_REDSTONE_LAMP = new MinecartItem(MinecartWithRedstoneLampEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
 
 	public static void init() {
 		for (Field field : ModItems.class.getFields()) {

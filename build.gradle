@@ -17,6 +17,7 @@ repositories {
 	mavenCentral()
 	maven { url "https://dl.bintray.com/shedaniel/shedaniel-mods" }
 	maven { url 'https://jitpack.io' }
+	maven { url 'https://aperlambda.github.io/maven'}
 }
 
 dependencies {
@@ -27,6 +28,7 @@ dependencies {
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
+	modImplementation "com.github.LambdAurora:LambDynamicLights:${project.ldl_version}"
 }
 
 processResources {
