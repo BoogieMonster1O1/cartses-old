@@ -54,7 +54,7 @@ public class MinecartWithRedstoneLampEntity extends AbstractMinecartEntity {
 			BlockPos blockPos = new BlockPos(x, y, z);
 			BlockState blockState = this.world.getBlockState(blockPos);
 			if (AbstractRailBlock.isRail(blockState)) {
-				if (blockState.isOf(Blocks.DETECTOR_RAIL) && blockState.get(PoweredRailBlock.POWERED)) {
+				if (blockState.isOf(Blocks.ACTIVATOR_RAIL) && blockState.get(PoweredRailBlock.POWERED)) {
 					this.setLit(true);
 				}
 			} else {
@@ -62,7 +62,7 @@ public class MinecartWithRedstoneLampEntity extends AbstractMinecartEntity {
 			}
 		}
 		if (this.world.isClient()) {
-			if (this.removed) {
+			if (this.removed || !this.isLit()) {
 				((DynamicLightSource) this).setDynamicLightEnabled(false);
 			} else {
 				((DynamicLightSource) this).dynamicLightTick();

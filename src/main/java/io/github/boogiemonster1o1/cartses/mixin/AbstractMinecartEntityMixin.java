@@ -3,6 +3,7 @@ package io.github.boogiemonster1o1.cartses.mixin;
 import io.github.boogiemonster1o1.cartses.entity.ModEntityTypes;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithBarrelEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithCraftingTableEntity;
+import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithEnderChestEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithGlowstoneEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithRedstoneLampEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -25,6 +26,8 @@ public class AbstractMinecartEntityMixin {
 			cir.setReturnValue(new MinecartWithGlowstoneEntity(ModEntityTypes.MINECART_WITH_GLOWSTONE, world, x, y, z));
 		} else if (type == MinecartWithRedstoneLampEntity.MINECART_TYPE) {
 			cir.setReturnValue(new MinecartWithRedstoneLampEntity(ModEntityTypes.MINECART_WITH_REDSTONE_LAMP, world, x, y, z));
+		} else if (type == MinecartWithEnderChestEntity.MINECART_TYPE) {
+			cir.setReturnValue(new MinecartWithEnderChestEntity(ModEntityTypes.MINECART_WITH_ENDER_CHEST, world, x, y, z));
 		}
 	}
 }

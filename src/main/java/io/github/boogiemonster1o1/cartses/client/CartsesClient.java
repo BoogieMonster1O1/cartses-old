@@ -4,7 +4,6 @@ import io.github.boogiemonster1o1.cartses.compat.client.DynLightsCompat;
 import io.github.boogiemonster1o1.cartses.entity.ModEntityTypes;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithBarrelEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithCraftingTableEntity;
-import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithRedstoneLampEntity;
 
 import net.minecraft.client.render.entity.MinecartEntityRenderer;
 

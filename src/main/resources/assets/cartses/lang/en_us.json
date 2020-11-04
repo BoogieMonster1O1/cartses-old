@@ -3,5 +3,7 @@
   "item.cartses.minecart_with_barrel": "Minecart with Barrel",
   "item.cartses.minecart_with_glowstone": "Minecart with Glowstone",
   "item.cartses.minecart_with_redstone_lamp": "Minecart with Redstone Lamp",
-  "screenhandler.cartses.crafting": "Minecart with Crafting Table"
+  "item.cartses.minecart_with_ender_chest": "Minecart with Ender Chest",
+  "screenhandler.cartses.crafting": "Minecart with Crafting Table",
+  "screenhandler.cartses.ender_chest": "Minecart With Ender chest"
 }

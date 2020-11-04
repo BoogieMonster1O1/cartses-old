@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 
 @SuppressWarnings({"EntityConstructor", "CodeBlock2Expr"})
 public class MinecartWithCraftingTableEntity extends AbstractMinecartEntity {
-	private static final Text DISPLAY_NAME = new TranslatableText("screenhandler.cartses.crafting", new Object[0]);
+	private static final Text DISPLAY_NAME = new TranslatableText("screenhandler.cartses.crafting");
 	public static final Type MINECART_TYPE = ClassTinkerers.getEnum(Type.class, "CRAFTING_TABLE");
 
 	public MinecartWithCraftingTableEntity(EntityType<?> entityType, World world) {

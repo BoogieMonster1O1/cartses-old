@@ -10,6 +10,12 @@ public class EnumHackery implements Runnable {
 	public void run() {
 		MappingResolver resolver = FabricLoader.getInstance().getMappingResolver();
 		String minecartTypeName = resolver.mapClassName("intermediary", "net.minecraft.class_1688$class_1689");
-		ClassTinkerers.enumBuilder(minecartTypeName, new String[0]).addEnum("CRAFTING_TABLE").addEnum("GLOWSTONE").addEnum("REDSTONE_LAMP").addEnum("BARREL").build();
+		ClassTinkerers.enumBuilder(minecartTypeName, new String[0])
+				.addEnum("CRAFTING_TABLE")
+				.addEnum("GLOWSTONE")
+				.addEnum("REDSTONE_LAMP")
+				.addEnum("BARREL")
+				.addEnum("ENDER_CHEST")
+				.build();
 	}
 }

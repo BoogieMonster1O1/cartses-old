@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 
 @SuppressWarnings("EntityConstructor")
 public class MinecartWithGlowstoneEntity extends AbstractMinecartEntity {
+
 	public static final Type MINECART_TYPE = ClassTinkerers.getEnum(Type.class, "GLOWSTONE");
 
 	public MinecartWithGlowstoneEntity(EntityType<?> entityType, World world) {

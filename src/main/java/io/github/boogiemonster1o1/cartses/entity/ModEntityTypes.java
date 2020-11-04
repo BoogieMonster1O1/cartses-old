@@ -6,6 +6,7 @@ import io.github.boogiemonster1o1.cartses.Cartses;
 import io.github.boogiemonster1o1.cartses.RegisterMe;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithBarrelEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithCraftingTableEntity;
+import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithEnderChestEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithGlowstoneEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithRedstoneLampEntity;
 
@@ -28,6 +29,9 @@ public class ModEntityTypes {
 
 	@RegisterMe("minecart_with_redstone_lamp")
 	public static final EntityType<MinecartWithRedstoneLampEntity> MINECART_WITH_REDSTONE_LAMP = FabricEntityTypeBuilder.<MinecartWithRedstoneLampEntity>create().entityFactory(MinecartWithRedstoneLampEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.7F)).trackRangeChunks(8).build();
+
+	@RegisterMe("minecart_with_ender_chest")
+	public static final EntityType<MinecartWithEnderChestEntity> MINECART_WITH_ENDER_CHEST = FabricEntityTypeBuilder.<MinecartWithEnderChestEntity>create().entityFactory(MinecartWithEnderChestEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.7F)).trackRangeChunks(8).build();
 
 	public static void init() {
 		for (Field field : ModEntityTypes.class.getFields()) {

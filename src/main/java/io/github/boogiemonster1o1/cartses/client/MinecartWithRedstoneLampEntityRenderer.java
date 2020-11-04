@@ -2,13 +2,11 @@ package io.github.boogiemonster1o1.cartses.client;
 
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithRedstoneLampEntity;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.RedstoneLampBlock;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MinecartEntityRenderer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.BlockPos;
 
 public class MinecartWithRedstoneLampEntityRenderer extends MinecartEntityRenderer<MinecartWithRedstoneLampEntity> {
 	public MinecartWithRedstoneLampEntityRenderer(EntityRenderDispatcher dispatcher) {
@@ -16,9 +14,12 @@ public class MinecartWithRedstoneLampEntityRenderer extends MinecartEntityRender
 	}
 
 	@Override
-	public void render(MinecartWithRedstoneLampEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-		BlockState state = Blocks.REDSTONE_LAMP.getDefaultState();
-		light = entity.isLit() ? state.with(RedstoneLampBlock.LIT, true).getLuminance() : state.getLuminance();
-		super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
+	protected int method_27950(MinecartWithRedstoneLampEntity entity, BlockPos blockPos) {
+		return entity.isLit() ? Blocks.REDSTONE_LAMP.getDefaultState().with(RedstoneLampBlock.LIT, true).getLuminance() : super.method_27950(entity, blockPos);
+	}
+
+	@Override
+	protected int getBlockLight(MinecartWithRedstoneLampEntity entity, BlockPos blockPos) {
+		return entity.isLit() ? Blocks.REDSTONE_LAMP.getDefaultState().with(RedstoneLampBlock.LIT, true).getLuminance() : super.getBlockLight(entity, blockPos);
 	}
 }

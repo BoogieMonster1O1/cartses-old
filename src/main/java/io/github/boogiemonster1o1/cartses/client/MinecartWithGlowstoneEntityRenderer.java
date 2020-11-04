@@ -3,10 +3,9 @@ package io.github.boogiemonster1o1.cartses.client;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithGlowstoneEntity;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MinecartEntityRenderer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.BlockPos;
 
 public class MinecartWithGlowstoneEntityRenderer extends MinecartEntityRenderer<MinecartWithGlowstoneEntity> {
 	public MinecartWithGlowstoneEntityRenderer(EntityRenderDispatcher dispatcher) {
@@ -14,7 +13,12 @@ public class MinecartWithGlowstoneEntityRenderer extends MinecartEntityRenderer<
 	}
 
 	@Override
-	public void render(MinecartWithGlowstoneEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-		super.render(entity, yaw, tickDelta, matrices, vertexConsumers, Blocks.GLOWSTONE.getDefaultState().getLuminance());
+	protected int method_27950(MinecartWithGlowstoneEntity entity, BlockPos blockPos) {
+		return Blocks.GLOWSTONE.getDefaultState().getLuminance();
+	}
+
+	@Override
+	protected int getBlockLight(MinecartWithGlowstoneEntity entity, BlockPos blockPos) {
+		return Blocks.GLOWSTONE.getDefaultState().getLuminance();
 	}
 }
