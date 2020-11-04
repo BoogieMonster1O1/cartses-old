@@ -17,6 +17,7 @@ public class CartsesClient implements ClientModInitializer {
 		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.MINECART_WITH_BARREL, (dispatcher, ctx) -> new MinecartEntityRenderer<MinecartWithBarrelEntity>(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.MINECART_WITH_GLOWSTONE, (dispatcher, ctx) -> new MinecartWithGlowstoneEntityRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.MINECART_WITH_REDSTONE_LAMP, (dispatcher, ctx) -> new MinecartWithRedstoneLampEntityRenderer(dispatcher));
+		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.MINECART_WITH_ENDER_CHEST, (dispatcher, ctx) -> new MinecartWithEnderChestEntityRenderer(dispatcher));
 		DynLightsCompat.init();
 	}
 }
