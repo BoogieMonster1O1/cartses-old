@@ -30,6 +30,10 @@ public class MinecartWithGlowstoneEntity extends AbstractMinecartEntity {
 	@Override
 	public void tick() {
 		super.tick();
+		this.doClientDynLightTick();
+	}
+
+	private void doClientDynLightTick() {
 		if (this.world.isClient()) {
 			if (this.removed) {
 				((DynamicLightSource) this).setDynamicLightEnabled(false);

@@ -61,14 +61,7 @@ public class MinecartWithRedstoneLampEntity extends AbstractMinecartEntity {
 				this.setLit(false);
 			}
 		}
-		if (this.world.isClient()) {
-			if (this.removed || !this.isLit()) {
-				((DynamicLightSource) this).setDynamicLightEnabled(false);
-			} else {
-				((DynamicLightSource) this).dynamicLightTick();
-				LambDynLights.updateTracking((DynamicLightSource) this);
-			}
-		}
+		this.doClientDynLightTick();
 	}
 
 
@@ -110,6 +103,17 @@ public class MinecartWithRedstoneLampEntity extends AbstractMinecartEntity {
 		super.dropItems(damageSource);
 		if (this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
 			this.dropItem(Blocks.REDSTONE_LAMP);
+		}
+	}
+
+	private void doClientDynLightTick() {
+		if (this.world.isClient()) {
+			if (this.removed || !this.isLit()) {
+				((DynamicLightSource) this).setDynamicLightEnabled(false);
+			} else {
+				((DynamicLightSource) this).dynamicLightTick();
+				LambDynLights.updateTracking((DynamicLightSource) this);
+			}
 		}
 	}
 }
