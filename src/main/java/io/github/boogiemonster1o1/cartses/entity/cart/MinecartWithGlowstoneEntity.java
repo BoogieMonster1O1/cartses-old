@@ -2,6 +2,8 @@ package io.github.boogiemonster1o1.cartses.entity.cart;
 
 import com.chocohead.mm.api.ClassTinkerers;
 import io.github.boogiemonster1o1.cartses.networking.EntityPacketUtils;
+import me.lambdaurora.lambdynlights.DynamicLightSource;
+import me.lambdaurora.lambdynlights.LambDynLights;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -22,6 +24,19 @@ public class MinecartWithGlowstoneEntity extends AbstractMinecartEntity {
 
 	public MinecartWithGlowstoneEntity(EntityType<?> type, World world, double x, double y, double z) {
 		super(type, world, x, y, z);
+	}
+
+	@Override
+	public void tick() {
+		super.tick();
+		if (this.world.isClient()) {
+			if (this.removed) {
+				((DynamicLightSource) this).setDynamicLightEnabled(false);
+			} else {
+				((DynamicLightSource) this).dynamicLightTick();
+				LambDynLights.updateTracking((DynamicLightSource) this);
+			}
+		}
 	}
 
 	@Override

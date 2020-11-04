@@ -2,11 +2,14 @@ package io.github.boogiemonster1o1.cartses.entity.cart;
 
 import com.chocohead.mm.api.ClassTinkerers;
 import io.github.boogiemonster1o1.cartses.networking.EntityPacketUtils;
+import me.lambdaurora.lambdynlights.DynamicLightSource;
+import me.lambdaurora.lambdynlights.LambDynLights;
 
 import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.DetectorRailBlock;
+import net.minecraft.block.PoweredRailBlock;
+import net.minecraft.block.RedstoneLampBlock;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -20,10 +23,15 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.EnvironmentInterface;
+import net.fabricmc.api.EnvironmentInterfaces;
+
 @SuppressWarnings("EntityConstructor")
+@EnvironmentInterfaces(@EnvironmentInterface(value = EnvType.CLIENT, itf = DynamicLightSource.class))
 public class MinecartWithRedstoneLampEntity extends AbstractMinecartEntity {
 	public static final Type MINECART_TYPE = ClassTinkerers.getEnum(Type.class, "REDSTONE_LAMP");
-	private static final TrackedData<Integer> LIGHT_TICKS = DataTracker.registerData(MinecartWithRedstoneLampEntity.class, TrackedDataHandlerRegistry.INTEGER);
+	private static final TrackedData<Boolean> LIT = DataTracker.registerData(MinecartWithRedstoneLampEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
 	public MinecartWithRedstoneLampEntity(EntityType<?> entityType, World world) {
 		super(entityType, world);
@@ -46,28 +54,45 @@ public class MinecartWithRedstoneLampEntity extends AbstractMinecartEntity {
 			BlockPos blockPos = new BlockPos(x, y, z);
 			BlockState blockState = this.world.getBlockState(blockPos);
 			if (AbstractRailBlock.isRail(blockState)) {
-				if (blockState.isOf(Blocks.DETECTOR_RAIL) && blockState.get(DetectorRailBlock.POWERED) && this.getLightTicks() <= 1) {
-					this.setLightTicks(5);
+				if (blockState.isOf(Blocks.DETECTOR_RAIL) && blockState.get(PoweredRailBlock.POWERED)) {
+					this.setLit(true);
 				}
+			} else {
+				this.setLit(false);
 			}
 		}
-		if (this.getLightTicks() > 1) {
-			this.setLightTicks(this.getLightTicks() - 1);
+		if (this.world.isClient()) {
+			if (this.removed) {
+				((DynamicLightSource) this).setDynamicLightEnabled(false);
+			} else {
+				((DynamicLightSource) this).dynamicLightTick();
+				LambDynLights.updateTracking((DynamicLightSource) this);
+			}
 		}
 	}
+
 
 	@Override
 	protected void initDataTracker() {
 		super.initDataTracker();
-		this.dataTracker.startTracking(LIGHT_TICKS, 0);
+		this.dataTracker.startTracking(LIT, false);
 	}
 
-	public void setLightTicks(int value) {
-		this.dataTracker.set(LIGHT_TICKS, value);
+	public void setLit(boolean value) {
+		this.dataTracker.set(LIT, value);
 	}
 
-	public int getLightTicks() {
-		return this.dataTracker.get(LIGHT_TICKS);
+	public boolean isLit() {
+		return this.dataTracker.get(LIT);
+	}
+
+	@Override
+	public BlockState getContainedBlock() {
+		BlockState state = Blocks.REDSTONE_LAMP.getDefaultState();
+		if (this.isLit()) {
+			return state.with(RedstoneLampBlock.LIT, true);
+		}
+		return state;
 	}
 
 	@Override
