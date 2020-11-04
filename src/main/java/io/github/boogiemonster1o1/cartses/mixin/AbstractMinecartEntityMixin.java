@@ -1,6 +1,7 @@
 package io.github.boogiemonster1o1.cartses.mixin;
 
 import io.github.boogiemonster1o1.cartses.entity.ModEntityTypes;
+import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithBarrelEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithCraftingTableEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,6 +17,8 @@ public class AbstractMinecartEntityMixin {
 	private static void returnIt(World world, double x, double y, double z, AbstractMinecartEntity.Type type, CallbackInfoReturnable<AbstractMinecartEntity> cir) {
 		if (type == MinecartWithCraftingTableEntity.MINECART_TYPE) {
 			cir.setReturnValue(new MinecartWithCraftingTableEntity(ModEntityTypes.MINECART_WITH_CRAFTING_TABLE, world, x, y, z));
+		} else if (type == MinecartWithBarrelEntity.MINECART_TYPE) {
+			cir.setReturnValue(new MinecartWithBarrelEntity(ModEntityTypes.MINECART_WITH_BARREL, x, y, z, world));
 		}
 	}
 }

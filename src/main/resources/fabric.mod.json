@@ -20,7 +20,8 @@
       "io.github.boogiemonster1o1.cartses.EnumHackery"
     ],
     "client": [
-      "io.github.boogiemonster1o1.cartses.networking.EntityPacketOnClient::initNetworking"
+      "io.github.boogiemonster1o1.cartses.networking.EntityPacketOnClient::initNetworking",
+      "io.github.boogiemonster1o1.cartses.client.CartsesClient"
     ],
     "server": []
   },

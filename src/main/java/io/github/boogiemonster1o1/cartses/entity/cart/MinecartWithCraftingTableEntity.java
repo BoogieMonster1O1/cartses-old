@@ -4,16 +4,21 @@ import com.chocohead.mm.api.ClassTinkerers;
 import io.github.boogiemonster1o1.cartses.networking.EntityPacketUtils;
 import io.github.boogiemonster1o1.cartses.screen.MinecartWithCraftingTableScreenHandler;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.network.Packet;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
+import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
 @SuppressWarnings({"EntityConstructor", "CodeBlock2Expr"})
@@ -30,6 +35,19 @@ public class MinecartWithCraftingTableEntity extends AbstractMinecartEntity {
 	}
 
 	@Override
+	public void dropItems(DamageSource damageSource) {
+		super.dropItems(damageSource);
+		if (this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
+			this.dropItem(Blocks.CRAFTING_TABLE);
+		}
+	}
+
+	@Override
+	public BlockState getContainedBlock() {
+		return Blocks.CRAFTING_TABLE.getDefaultState();
+	}
+
+	@Override
 	public Packet<?> createSpawnPacket() {
 		return EntityPacketUtils.createPacket(this);
 	}
@@ -41,6 +59,10 @@ public class MinecartWithCraftingTableEntity extends AbstractMinecartEntity {
 
 	@Override
 	public ActionResult interact(PlayerEntity player, Hand hand) {
+		if (this.world.isClient()) {
+			return ActionResult.SUCCESS;
+		}
+		player.incrementStat(Stats.INTERACT_WITH_CRAFTING_TABLE);
 		player.openHandledScreen(
 				new SimpleNamedScreenHandlerFactory(
 						(syncId, inv, player1) -> {
@@ -53,6 +75,6 @@ public class MinecartWithCraftingTableEntity extends AbstractMinecartEntity {
 						DISPLAY_NAME
 				)
 		);
-		return ActionResult.SUCCESS;
+		return ActionResult.CONSUME;
 	}
 }

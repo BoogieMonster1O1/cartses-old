@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import io.github.boogiemonster1o1.cartses.Cartses;
 import io.github.boogiemonster1o1.cartses.RegisterMe;
+import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithBarrelEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithCraftingTableEntity;
 
 import net.minecraft.item.Item;
@@ -15,6 +16,9 @@ import net.minecraft.util.registry.Registry;
 public class ModItems {
 	@RegisterMe("minecart_with_crafting_table")
 	public static final Item MINECART_WITH_CRAFTING_TABLE = new MinecartItem(MinecartWithCraftingTableEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
+
+	@RegisterMe("minecart_with_crafting_table")
+	public static final Item MINECART_WITH_BARREL = new MinecartItem(MinecartWithBarrelEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
 
 	public static void init() {
 		for (Field field : ModItems.class.getFields()) {

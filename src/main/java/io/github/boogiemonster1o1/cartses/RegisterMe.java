@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface RegisterMe {
-	Predicate<Field> PREDICATE = field -> !Modifier.isPublic(field.getModifiers()) || !Modifier.isFinal(field.getModifiers()) || !Modifier.isStatic(field.getModifiers()) && (field.isAnnotationPresent(RegisterMe.class));
+	Predicate<Field> PREDICATE = ((field) -> Modifier.isPublic(field.getModifiers()) || Modifier.isFinal(field.getModifiers()) || Modifier.isStatic(field.getModifiers()) && (field.isAnnotationPresent(RegisterMe.class)));
 
 	String value();
 }

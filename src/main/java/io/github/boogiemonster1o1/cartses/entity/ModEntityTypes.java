@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import io.github.boogiemonster1o1.cartses.Cartses;
 import io.github.boogiemonster1o1.cartses.RegisterMe;
+import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithBarrelEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithCraftingTableEntity;
 
 import net.minecraft.entity.EntityDimensions;
@@ -16,6 +17,9 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 public class ModEntityTypes {
 	@RegisterMe("minecart_with_crafting_table")
 	public static final EntityType<MinecartWithCraftingTableEntity> MINECART_WITH_CRAFTING_TABLE = FabricEntityTypeBuilder.<MinecartWithCraftingTableEntity>create().entityFactory(MinecartWithCraftingTableEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.7F)).trackRangeChunks(8).build();
+
+	@RegisterMe("minecart_with_barrel")
+	public static final EntityType<MinecartWithBarrelEntity> MINECART_WITH_BARREL = FabricEntityTypeBuilder.<MinecartWithBarrelEntity>create().entityFactory(MinecartWithBarrelEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.7F)).trackRangeChunks(8).build();
 
 	public static void init() {
 		for (Field field : ModEntityTypes.class.getFields()) {
