@@ -1,8 +1,10 @@
-package io.github.boogiemonster1o1.cartses;
+package io.github.boogiemonster1o1.cartses.item;
 
 import java.lang.reflect.Field;
 
-import io.github.boogiemonster1o1.cartses.cart.MinecartWithCraftingTableEntity;
+import io.github.boogiemonster1o1.cartses.Cartses;
+import io.github.boogiemonster1o1.cartses.RegisterMe;
+import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithCraftingTableEntity;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;

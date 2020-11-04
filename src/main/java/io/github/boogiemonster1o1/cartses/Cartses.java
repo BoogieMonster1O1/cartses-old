@@ -2,6 +2,7 @@ package io.github.boogiemonster1o1.cartses;
 
 import net.fabricmc.api.ModInitializer;
 
+import io.github.boogiemonster1o1.cartses.entity.ModEntityTypes;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

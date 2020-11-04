@@ -1,7 +1,7 @@
 package io.github.boogiemonster1o1.cartses.mixin;
 
-import io.github.boogiemonster1o1.cartses.ModEntityTypes;
-import io.github.boogiemonster1o1.cartses.cart.MinecartWithCraftingTableEntity;
+import io.github.boogiemonster1o1.cartses.entity.ModEntityTypes;
+import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithCraftingTableEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
