@@ -1,6 +1,6 @@
 package io.github.boogiemonster1o1.cartses.mixin;
 
-import io.github.boogiemonster1o1.cartses.util.EnderChestInventoryExtended;
+import io.github.boogiemonster1o1.cartses.duck.ExtendedEnderChestInventory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +12,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EnderChestInventory;
 
 @Mixin(EnderChestInventory.class)
-public class EnderChestInventoryMixin implements EnderChestInventoryExtended {
+public class EnderChestInventoryMixin implements ExtendedEnderChestInventory {
 	@Unique
 	public boolean forceCanUse = false;
 
