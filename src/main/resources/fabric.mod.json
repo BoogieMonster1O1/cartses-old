@@ -23,6 +23,9 @@
       "io.github.boogiemonster1o1.cartses.networking.EntityPacketOnClient::initNetworking",
       "io.github.boogiemonster1o1.cartses.client.CartsesClient"
     ],
+    "dynamiclights": [
+      "io.github.boogiemonster1o1.cartses.compat.client.DynLightsCompat"
+    ],
     "server": []
   },
   "mixins": [

@@ -56,12 +56,6 @@ public class MinecartWithEnderChestEntity extends AbstractMinecartEntity {
 	}
 
 	@Override
-	public void tick() {
-		super.tick();
-		this.doClientDynLightTick();
-	}
-
-	@Override
 	public Packet<?> createSpawnPacket() {
 		return EntityPacketUtils.createPacket(this);
 	}
@@ -82,17 +76,6 @@ public class MinecartWithEnderChestEntity extends AbstractMinecartEntity {
 			}
 		} else {
 			return ActionResult.success(this.world.isClient);
-		}
-	}
-
-	private void doClientDynLightTick() {
-		if (this.world.isClient()) {
-			if (this.removed) {
-				((DynamicLightSource) this).setDynamicLightEnabled(false);
-			} else {
-				((DynamicLightSource) this).dynamicLightTick();
-				LambDynLights.updateTracking((DynamicLightSource) this);
-			}
 		}
 	}
 }

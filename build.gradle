@@ -28,7 +28,12 @@ dependencies {
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 	modImplementation "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
+	include "com.github.Chocohead:Fabric-ASM:${project.fabric_asm_version}"
 	modImplementation "com.github.LambdAurora:LambDynamicLights:${project.ldl_version}"
+
+	modApi("net.fabricmc:fabric-language-scala:0.3.2.+") {
+		exclude group: 'net.fabricmc'
+	}
 }
 
 processResources {

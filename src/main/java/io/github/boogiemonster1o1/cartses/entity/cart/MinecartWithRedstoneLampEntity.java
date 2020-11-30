@@ -24,8 +24,10 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
 import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.api.EnvironmentInterface;
 import net.fabricmc.api.EnvironmentInterfaces;
+import net.fabricmc.loader.api.FabricLoader;
 
 @SuppressWarnings("EntityConstructor")
 @EnvironmentInterfaces(@EnvironmentInterface(value = EnvType.CLIENT, itf = DynamicLightSource.class))
@@ -61,7 +63,6 @@ public class MinecartWithRedstoneLampEntity extends AbstractMinecartEntity {
 				this.setLit(false);
 			}
 		}
-		this.doClientDynLightTick();
 	}
 
 
@@ -103,17 +104,6 @@ public class MinecartWithRedstoneLampEntity extends AbstractMinecartEntity {
 		super.dropItems(damageSource);
 		if (this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
 			this.dropItem(Blocks.REDSTONE_LAMP);
-		}
-	}
-
-	private void doClientDynLightTick() {
-		if (this.world.isClient()) {
-			if (this.removed || !this.isLit()) {
-				((DynamicLightSource) this).setDynamicLightEnabled(false);
-			} else {
-				((DynamicLightSource) this).dynamicLightTick();
-				LambDynLights.updateTracking((DynamicLightSource) this);
-			}
 		}
 	}
 }

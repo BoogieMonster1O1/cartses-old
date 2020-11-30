@@ -7,6 +7,10 @@ import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.MinecartEntityRenderer;
 import net.minecraft.util.math.BlockPos;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
+@Environment(EnvType.CLIENT)
 public class MinecartWithGlowstoneEntityRenderer extends MinecartEntityRenderer<MinecartWithGlowstoneEntity> {
 	public MinecartWithGlowstoneEntityRenderer(EntityRenderDispatcher dispatcher) {
 		super(dispatcher);
