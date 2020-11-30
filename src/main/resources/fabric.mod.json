@@ -3,28 +3,38 @@
   "id": "cartses",
   "version": "${version}",
   "name": "Cartses",
-  "description": "Cartses",
+  "description": "More minecart types",
   "authors": [
     "BoogieMonster1O1"
   ],
-  "contributors": [],
   "contact": {},
   "license": "ISC",
   "icon": "assets/cartses/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.boogiemonster1o1.cartses.Cartses"
+      {
+        "value": "io.github.boogiemonster1o1.cartses.Cartses",
+        "adapter": "scala"
+      }
     ],
     "mm:early_risers": [
-      "io.github.boogiemonster1o1.cartses.EnumHackery"
+      {
+        "value": "io.github.boogiemonster1o1.cartses.CartsesEarlyRiser",
+        "adapter": "scala"
+      }
     ],
     "client": [
-      "io.github.boogiemonster1o1.cartses.networking.EntityPacketOnClient::initNetworking",
-      "io.github.boogiemonster1o1.cartses.client.CartsesClient"
+      {
+        "value": "io.github.boogiemonster1o1.cartses.client.CartsesClient",
+        "adapter": "scala"
+      }
     ],
     "dynamiclights": [
-      "io.github.boogiemonster1o1.cartses.compat.client.DynLightsCompat"
+      {
+        "value": "io.github.boogiemonster1o1.cartses.client.ldl.LdlInitializer",
+        "adapter": "scala"
+      }
     ],
     "server": []
   },

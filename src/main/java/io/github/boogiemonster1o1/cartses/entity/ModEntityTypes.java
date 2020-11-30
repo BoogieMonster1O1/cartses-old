@@ -40,7 +40,7 @@ public class ModEntityTypes {
 			}
 			RegisterMe annotation = field.getAnnotation(RegisterMe.class);
 			try {
-				Registry.register(Registry.ENTITY_TYPE, new Identifier(Cartses.MOD_ID, annotation.value()), (EntityType<?>) field.get(null));
+				Registry.register(Registry.ENTITY_TYPE, new Identifier(Cartses.modId(), annotation.value()), (EntityType<?>) field.get(null));
 			} catch (IllegalAccessException e) {
 				throw new AssertionError(e);
 			}
