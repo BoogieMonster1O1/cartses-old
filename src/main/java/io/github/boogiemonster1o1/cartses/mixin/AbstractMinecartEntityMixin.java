@@ -1,5 +1,6 @@
 package io.github.boogiemonster1o1.cartses.mixin;
 
+import io.github.boogiemonster1o1.cartses.entity.MinecartTypes;
 import io.github.boogiemonster1o1.cartses.entity.ModEntityTypes;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithBarrelEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithCraftingTableEntity;
@@ -18,15 +19,15 @@ import net.minecraft.world.World;
 public class AbstractMinecartEntityMixin {
 	@Inject(method = "create", at = @At("TAIL"), cancellable = true)
 	private static void returnIt(World world, double x, double y, double z, AbstractMinecartEntity.Type type, CallbackInfoReturnable<AbstractMinecartEntity> cir) {
-		if (type == MinecartWithCraftingTableEntity.MINECART_TYPE) {
+		if (type == MinecartTypes.craftingTable()) {
 			cir.setReturnValue(new MinecartWithCraftingTableEntity(ModEntityTypes.MINECART_WITH_CRAFTING_TABLE, world, x, y, z));
-		} else if (type == MinecartWithBarrelEntity.MINECART_TYPE) {
+		} else if (type == MinecartTypes.barrel()) {
 			cir.setReturnValue(new MinecartWithBarrelEntity(ModEntityTypes.MINECART_WITH_BARREL, x, y, z, world));
-		} else if (type == MinecartWithGlowstoneEntity.MINECART_TYPE) {
+		} else if (type == MinecartTypes.glowstone()) {
 			cir.setReturnValue(new MinecartWithGlowstoneEntity(ModEntityTypes.MINECART_WITH_GLOWSTONE, world, x, y, z));
-		} else if (type == MinecartWithRedstoneLampEntity.MINECART_TYPE) {
+		} else if (type == MinecartTypes.redstoneLamp()) {
 			cir.setReturnValue(new MinecartWithRedstoneLampEntity(ModEntityTypes.MINECART_WITH_REDSTONE_LAMP, world, x, y, z));
-		} else if (type == MinecartWithEnderChestEntity.MINECART_TYPE) {
+		} else if (type == MinecartTypes.enderChest()) {
 			cir.setReturnValue(new MinecartWithEnderChestEntity(ModEntityTypes.MINECART_WITH_ENDER_CHEST, world, x, y, z));
 		}
 	}

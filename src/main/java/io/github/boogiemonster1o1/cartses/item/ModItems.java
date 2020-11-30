@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 import io.github.boogiemonster1o1.cartses.Cartses;
 import io.github.boogiemonster1o1.cartses.RegisterMe;
+import io.github.boogiemonster1o1.cartses.entity.MinecartTypes;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithBarrelEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithCraftingTableEntity;
 import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithEnderChestEntity;
@@ -18,19 +19,19 @@ import net.minecraft.util.registry.Registry;
 
 public class ModItems {
 	@RegisterMe("minecart_with_crafting_table")
-	public static final Item MINECART_WITH_CRAFTING_TABLE = new MinecartItem(MinecartWithCraftingTableEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
+	public static final Item MINECART_WITH_CRAFTING_TABLE = new MinecartItem(MinecartTypes.craftingTable(), new Item.Settings().group(ItemGroup.TRANSPORTATION));
 
 	@RegisterMe("minecart_with_barrel")
-	public static final Item MINECART_WITH_BARREL = new MinecartItem(MinecartWithBarrelEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
+	public static final Item MINECART_WITH_BARREL = new MinecartItem(MinecartTypes.barrel(), new Item.Settings().group(ItemGroup.TRANSPORTATION));
 
 	@RegisterMe("minecart_with_glowstone")
-	public static final Item MINECART_WITH_GLOWSTONE = new MinecartItem(MinecartWithGlowstoneEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
+	public static final Item MINECART_WITH_GLOWSTONE = new MinecartItem(MinecartTypes.glowstone(), new Item.Settings().group(ItemGroup.TRANSPORTATION));
 
 	@RegisterMe("minecart_with_redstone_lamp")
-	public static final Item MINECART_WITH_REDSTONE_LAMP = new MinecartItem(MinecartWithRedstoneLampEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
+	public static final Item MINECART_WITH_REDSTONE_LAMP = new MinecartItem(MinecartTypes.redstoneLamp(), new Item.Settings().group(ItemGroup.TRANSPORTATION));
 
 	@RegisterMe("minecart_with_ender_chest")
-	public static final Item MINECART_WITH_ENDER_CHEST = new MinecartItem(MinecartWithEnderChestEntity.MINECART_TYPE, new Item.Settings().group(ItemGroup.TRANSPORTATION));
+	public static final Item MINECART_WITH_ENDER_CHEST = new MinecartItem(MinecartTypes.enderChest(), new Item.Settings().group(ItemGroup.TRANSPORTATION));
 
 	public static void init() {
 		for (Field field : ModItems.class.getFields()) {

@@ -3,6 +3,8 @@ package io.github.boogiemonster1o1.cartses.networking;
 import java.util.Objects;
 import java.util.UUID;
 
+import io.github.boogiemonster1o1.cartses.entity.networking.EntityUtils;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -45,6 +47,6 @@ public class EntityPacketOnClient {
 	}
 
 	public static void initNetworking() {
-		ClientSidePacketRegistry.INSTANCE.register(EntityPacketUtils.ID, EntityPacketOnClient::onPacket);
+		ClientSidePacketRegistry.INSTANCE.register(EntityUtils.packetId(), EntityPacketOnClient::onPacket);
 	}
 }
