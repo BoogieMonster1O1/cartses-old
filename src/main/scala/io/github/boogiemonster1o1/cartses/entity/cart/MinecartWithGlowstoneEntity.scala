@@ -41,6 +41,12 @@ import net.minecraft.world.{GameRules, World}
 
 	override def getMinecartType: AbstractMinecartEntity.Type = MinecartTypes.glowstone
 
+
+	override def tick(): Unit = {
+		super.tick()
+		EntityUtils.dynLightsTick(this)
+	}
+
 	override def dropItems(damageSource: DamageSource): Unit = {
 		super.dropItems(damageSource)
 		if (this.world.getGameRules.getBoolean(GameRules.DO_ENTITY_DROPS)) this.dropItem(Blocks.GLOWSTONE)

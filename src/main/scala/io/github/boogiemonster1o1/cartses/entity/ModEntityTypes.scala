@@ -18,6 +18,7 @@
 
 package io.github.boogiemonster1o1.cartses.entity
 
+import io.github.boogiemonster1o1.cartses.Cartses
 import io.github.boogiemonster1o1.cartses.entity.cart.{MinecartWithBarrelEntity, MinecartWithCraftingTableEntity, MinecartWithEnderChestEntity, MinecartWithGlowstoneEntity, MinecartWithRedstoneLampEntity}
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.{EntityDimensions, EntityType}
@@ -46,6 +47,6 @@ object ModEntityTypes {
 	}
 
 	private def register(entityType: EntityType[_], name: String): Unit = {
-		Registry.register(Registry.ENTITY_TYPE, new Identifier(CartsesRef.modId, name), entityType)
+		Registry.register(Registry.ENTITY_TYPE, new Identifier(Cartses.modId, name), entityType)
 	}
 }

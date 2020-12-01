@@ -37,7 +37,6 @@ object MinecartWithRedstoneLampEntity {
 
 @SuppressWarnings(Array("EntityConstructor"))
 class MinecartWithRedstoneLampEntity(entityType: EntityType[_], world: World) extends AbstractMinecartEntity(entityType, world) {
-
 	def this(`type`: EntityType[_], world: World, x: Double, y: Double, z: Double) {
 		this(`type`, world)
 		EntityUtils.setupPos(this, x, y, z)
@@ -55,6 +54,7 @@ class MinecartWithRedstoneLampEntity(entityType: EntityType[_], world: World) ex
 			if (AbstractRailBlock.isRail(blockState)) if (blockState.isOf(Blocks.ACTIVATOR_RAIL) && blockState.get(PoweredRailBlock.POWERED)) this.setLit(true)
 			else this.setLit(false)
 		}
+		EntityUtils.dynLightsTick(this)
 	}
 
 	override protected def initDataTracker(): Unit = {

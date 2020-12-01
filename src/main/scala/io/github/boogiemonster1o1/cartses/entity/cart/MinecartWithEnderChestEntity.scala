@@ -44,6 +44,12 @@ import net.minecraft.world.{GameRules, World}
 
 	override def getContainedBlock: BlockState = Blocks.ENDER_CHEST.getDefaultState
 
+
+	override def tick(): Unit = {
+		super.tick()
+		EntityUtils.dynLightsTick(this)
+	}
+
 	override def dropItems(damageSource: DamageSource): Unit = {
 		super.dropItems(damageSource)
 		if (this.world.getGameRules.getBoolean(GameRules.DO_ENTITY_DROPS)) this.dropItem(Blocks.ENDER_CHEST)

@@ -22,7 +22,9 @@ import io.github.boogiemonster1o1.cartses.Cartses
 import io.github.boogiemonster1o1.cartses.entity.cart._
 import io.github.boogiemonster1o1.cartses.entity.{MinecartTypes, ModEntityTypes}
 import io.netty.buffer.Unpooled
+import me.lambdaurora.lambdynlights.{DynamicLightSource, LambDynLights}
 import net.fabricmc.fabric.api.network.ServerSidePacketRegistry
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.entity.Entity
 import net.minecraft.entity.vehicle.AbstractMinecartEntity
 import net.minecraft.network.{Packet, PacketByteBuf}
@@ -33,7 +35,6 @@ import net.minecraft.world.World
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
 object EntityUtils {
-
 	val packetId: Identifier = new Identifier(Cartses.modId, "spawn_entity")
 
 	def createPacket(entity: Entity): Packet[_] = {
@@ -65,5 +66,16 @@ object EntityUtils {
 		else if (entityType eq MinecartTypes.glowstone) cir.setReturnValue(new MinecartWithGlowstoneEntity(ModEntityTypes.minecartWithGlowstone, world, x, y, z))
 		else if (entityType eq MinecartTypes.redstoneLamp) cir.setReturnValue(new MinecartWithRedstoneLampEntity(ModEntityTypes.minecartWithRedstoneLamp, world, x, y, z))
 		else if (entityType eq MinecartTypes.enderChest) cir.setReturnValue(new MinecartWithEnderChestEntity(ModEntityTypes.minecartWithEnderChest, world, x, y, z))
+	}
+
+	def dynLightsTick(entity: Entity): Unit = {
+		if (!FabricLoader.getInstance().isModLoaded("lambdynlights")) return
+		if (!entity.world.isClient) return
+		val source: DynamicLightSource = entity.asInstanceOf[DynamicLightSource]
+		if (entity.removed) source.setDynamicLightEnabled(false)
+		else {
+			source.dynamicLightTick()
+			LambDynLights.updateTracking(source)
+		}
 	}
 }
