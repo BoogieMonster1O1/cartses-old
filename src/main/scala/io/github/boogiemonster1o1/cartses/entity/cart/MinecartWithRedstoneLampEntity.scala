@@ -59,18 +59,18 @@ class MinecartWithRedstoneLampEntity(entityType: EntityType[_], world: World) ex
 
 	override protected def initDataTracker(): Unit = {
 		super.initDataTracker()
-		this.dataTracker.startTracking(MinecartWithRedstoneLampEntity.LIT, false)
+		this.dataTracker.startTracking[java.lang.Boolean](MinecartWithRedstoneLampEntity.LIT, false)
 	}
 
 	def setLit(value: Boolean): Unit = {
-		this.dataTracker.set(MinecartWithRedstoneLampEntity.LIT, value)
+		this.dataTracker.set[java.lang.Boolean](MinecartWithRedstoneLampEntity.LIT, value)
 	}
 
 	def isLit: Boolean = this.dataTracker.get(MinecartWithRedstoneLampEntity.LIT)
 
 	override def getContainedBlock: BlockState = {
 		val state = Blocks.REDSTONE_LAMP.getDefaultState
-		if (this.isLit) return state.`with`[java.lang.Boolean, Boolean](RedstoneLampBlock.LIT, true)
+		if (this.isLit) return state.`with`[java.lang.Boolean, java.lang.Boolean](RedstoneLampBlock.LIT, true)
 		state
 	}
 

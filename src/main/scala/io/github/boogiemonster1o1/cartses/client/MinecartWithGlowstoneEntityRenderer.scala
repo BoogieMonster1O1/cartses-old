@@ -25,7 +25,7 @@ import net.minecraft.client.render.entity.{EntityRenderDispatcher, MinecartEntit
 import net.minecraft.util.math.BlockPos;
 
 
-@Environment(EnvType.CLIENT) class MinecartWithGlowstoneEntityRenderer(val dispatcher: EntityRenderDispatcher) extends MinecartEntityRenderer[MinecartWithGlowstoneEntity](dispatcher) {
+@Environment(EnvType.CLIENT) class MinecartWithGlowstoneEntityRenderer(val entityRenderDispatcher: EntityRenderDispatcher) extends MinecartEntityRenderer[MinecartWithGlowstoneEntity](entityRenderDispatcher) {
 
 	override protected def method_27950(entity: MinecartWithGlowstoneEntity, blockPos: BlockPos): Int = Blocks.GLOWSTONE.getDefaultState.getLuminance
 

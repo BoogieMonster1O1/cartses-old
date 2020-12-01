@@ -28,11 +28,11 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry
 import net.fabricmc.fabric.api.network.{ClientSidePacketRegistry, PacketContext}
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.entity.{EntityRenderDispatcher, MinecartEntityRenderer}
+import net.minecraft.entity.Entity
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.util.registry.Registry
 
-class CartsesClient extends ClientModInitializer {
-
+object CartsesClient extends ClientModInitializer {
 	override def onInitializeClient(): Unit = {
 		ClientSidePacketRegistry.INSTANCE.register(EntityUtils.packetId, onPacket)
 		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithCraftingTable, (dispatcher: EntityRenderDispatcher, ctx: EntityRendererRegistry.Context) => new MinecartEntityRenderer[MinecartWithCraftingTableEntity](dispatcher))
@@ -53,7 +53,7 @@ class CartsesClient extends ClientModInitializer {
 		val yaw = (byteBuf.readByte * 360).toFloat / 256.0F
 		context.getTaskQueue.execute(() => {
 			val world = MinecraftClient.getInstance.world
-			val entity = `type`.create(world)
+			val entity: Entity = `type`.create(world)
 			if (entity != null) {
 				entity.updatePosition(x, y, z)
 				entity.updateTrackedPosition(x, y, z)

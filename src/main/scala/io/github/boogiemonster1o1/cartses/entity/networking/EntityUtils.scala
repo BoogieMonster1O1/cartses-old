@@ -18,7 +18,7 @@
 
 package io.github.boogiemonster1o1.cartses.entity.networking
 
-import io.github.boogiemonster1o1.cartses.CartsesRef
+import io.github.boogiemonster1o1.cartses.Cartses
 import io.github.boogiemonster1o1.cartses.entity.cart._
 import io.github.boogiemonster1o1.cartses.entity.{MinecartTypes, ModEntityTypes}
 import io.netty.buffer.Unpooled
@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
 object EntityUtils {
 
-	val packetId: Identifier = new Identifier(CartsesRef.modId, "spawn_entity")
+	val packetId: Identifier = new Identifier(Cartses.modId, "spawn_entity")
 
 	def createPacket(entity: Entity): Packet[_] = {
 		val buf = new PacketByteBuf(Unpooled.buffer)

@@ -16,16 +16,19 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-package io.github.boogiemonster1o1.cartses
+package io.github.boogiemonster1o1.cartses;
 
-import org.apache.logging.log4j.{Level, LogManager, Logger}
+import com.chocohead.mm.api.ClassTinkerers;
 
-object CartsesRef {
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.MappingResolver;
 
-	val logger: Logger = LogManager.getLogger
-	val modId = "cartses"
-
-	def log(level: Level, message: String): Unit = {
-		logger.log(level, "[Cartses] " + message)
+// Doesn't work in scala :(
+public class CartsesEarlyRiser implements Runnable {
+	@Override
+	public void run() {
+		MappingResolver mappingResolver = FabricLoader.getInstance().getMappingResolver();
+		String minecartTypeName = mappingResolver.mapClassName("intermediary", "net.minecraft.class_1688$class_1689");
+		ClassTinkerers.enumBuilder(minecartTypeName, new String[0]).addEnum("CRAFTING_TABLE").addEnum("GLOWSTONE").addEnum("REDSTONE_LAMP").addEnum("BARREL").addEnum("ENDER_CHEST").build();
 	}
 }

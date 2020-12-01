@@ -18,7 +18,7 @@
 
 package io.github.boogiemonster1o1.cartses.item
 
-import io.github.boogiemonster1o1.cartses.CartsesRef
+import io.github.boogiemonster1o1.cartses.Cartses
 import io.github.boogiemonster1o1.cartses.entity.MinecartTypes
 import net.minecraft.item.{Item, ItemGroup, MinecartItem}
 import net.minecraft.util.Identifier
@@ -38,13 +38,13 @@ object ModItems {
 
 	def init(): Unit = {
 		register("minecart_with_crafting_table", minecartWithCraftingTable)
-		register("minecart_with_barrel", minecartWithCraftingTable)
-		register("minecart_with_glowstone", minecartWithCraftingTable)
-		register("minecart_with_redstone_lamp", minecartWithCraftingTable)
-		register("minecart_with_ender_chest", minecartWithCraftingTable)
+		register("minecart_with_barrel", minecartWithBarrel)
+		register("minecart_with_glowstone", minecartWithGlowstone)
+		register("minecart_with_redstone_lamp", minecartWithRedstoneLamp)
+		register("minecart_with_ender_chest", minecartWithEnderChest)
 	}
 
 	private def register(name: String, item: Item): Unit = {
-		Registry.register(Registry.ITEM, new Identifier(CartsesRef.modId, name), item)
+		Registry.register(Registry.ITEM, new Identifier(Cartses.modId, name), item)
 	}
 }

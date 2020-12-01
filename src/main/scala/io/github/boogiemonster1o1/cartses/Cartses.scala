@@ -18,14 +18,22 @@
 
 package io.github.boogiemonster1o1.cartses
 
-import com.chocohead.mm.api.ClassTinkerers
-import net.fabricmc.loader.api.{FabricLoader, MappingResolver}
+import io.github.boogiemonster1o1.cartses.entity.ModEntityTypes
+import io.github.boogiemonster1o1.cartses.item.ModItems
+import net.fabricmc.api.ModInitializer
+import org.apache.logging.log4j.{Level, LogManager, Logger}
 
-class CartsesEarlyRiser extends Runnable {
+object Cartses extends ModInitializer {
+	override def onInitialize(): Unit = {
+		log(Level.INFO, "Initializing Cartses")
+		ModEntityTypes.init()
+		ModItems.init()
+	}
 
-	override def run(): Unit = {
-		val resolver: MappingResolver = FabricLoader.getInstance.getMappingResolver
-		val minecartTypeName: String = resolver.mapClassName("intermediary", "net.minecraft.class_1688$class_1689")
-		ClassTinkerers.enumBuilder(minecartTypeName, new Array[String](0)).addEnum("CRAFTING_TABLE").addEnum("GLOWSTONE").addEnum("REDSTONE_LAMP").addEnum("BARREL").addEnum("ENDER_CHEST").build()
+	val modId = "cartses"
+	val logger: Logger = LogManager.getLogger
+
+	def log(level: Level, message: String): Unit = {
+		logger.log(level, "[Cartses] " + message)
 	}
 }

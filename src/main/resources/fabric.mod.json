@@ -14,15 +14,12 @@
   "entrypoints": {
     "main": [
       {
-        "value": "io.github.boogiemonster1o1.cartses.CartsesInitializer",
+        "value": "io.github.boogiemonster1o1.cartses.Cartses",
         "adapter": "scala"
       }
     ],
     "mm:early_risers": [
-      {
-        "value": "io.github.boogiemonster1o1.cartses.CartsesEarlyRiser",
-        "adapter": "scala"
-      }
+      "io.github.boogiemonster1o1.cartses.CartsesEarlyRiser"
     ],
     "client": [
       {
