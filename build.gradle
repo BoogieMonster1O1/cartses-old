@@ -3,6 +3,7 @@ plugins {
 	id 'scala'
 	id 'fabric-loom' version '0.5-SNAPSHOT'
 	id 'maven-publish'
+	id 'net.minecrell.licenser' version '0.4.1'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -80,6 +81,14 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 jar {
 	from "LICENSE"
 }
+
+license {
+	header rootProject.file('LICENSE')
+	include '**/*.scala'
+	include '**/*.java'
+}
+
+tasks.build.dependsOn("licenseFormat")
 
 // configure the maven publication
 publishing {
