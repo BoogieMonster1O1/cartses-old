@@ -1,0 +1,4 @@
+- Indent scala files with **tabs**, not two spaces
+- Use scala for everything other than mixins
+- Use java only for mixins
+- Make sure you apply editorconfig
