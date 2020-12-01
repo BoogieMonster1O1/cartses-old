@@ -15,11 +15,13 @@ import net.minecraft.util.math.{BlockPos, MathHelper}
 import net.minecraft.world.{GameRules, World}
 
 object MinecartWithRedstoneLampEntity {
+
 	private val LIT = DataTracker.registerData(classOf[MinecartWithRedstoneLampEntity], TrackedDataHandlerRegistry.BOOLEAN)
 }
 
 @SuppressWarnings(Array("EntityConstructor"))
 @EnvironmentInterfaces(Array(new EnvironmentInterface(value = EnvType.CLIENT, itf = classOf[DynamicLightSource]))) class MinecartWithRedstoneLampEntity(entityType: EntityType[_], world: World) extends AbstractMinecartEntity(entityType, world) {
+
 	def this(`type`: EntityType[_], world: World, x: Double, y: Double, z: Double) {
 		this(`type`, world)
 		EntityUtils.setupPos(this, x, y, z)
@@ -52,7 +54,7 @@ object MinecartWithRedstoneLampEntity {
 
 	override def getContainedBlock: BlockState = {
 		val state = Blocks.REDSTONE_LAMP.getDefaultState
-		if (this.isLit) return state.`with`(RedstoneLampBlock.LIT, true)
+		if (this.isLit) return state.`with`[java.lang.Boolean, Boolean](RedstoneLampBlock.LIT, true)
 		state
 	}
 

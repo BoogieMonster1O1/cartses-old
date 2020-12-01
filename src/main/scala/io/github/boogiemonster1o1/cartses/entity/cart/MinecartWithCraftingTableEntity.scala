@@ -15,7 +15,8 @@ import net.minecraft.text.TranslatableText
 import net.minecraft.util.{ActionResult, Hand}
 import net.minecraft.world.{GameRules, World}
 
-@SuppressWarnings(Array(Array("EntityConstructor", "CodeBlock2Expr"))) class MinecartWithCraftingTableEntity(entityType: EntityType[_], world: World) extends AbstractMinecartEntity(entityType, world) {
+@SuppressWarnings(Array("EntityConstructor", "CodeBlock2Expr")) class MinecartWithCraftingTableEntity(entityType: EntityType[_], world: World) extends AbstractMinecartEntity(entityType, world) {
+
 	def this(`type`: EntityType[_], world: World, x: Double, y: Double, z: Double) {
 		this(`type`, world)
 		EntityUtils.setupPos(this, x, y, z)

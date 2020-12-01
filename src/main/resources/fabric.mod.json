@@ -14,7 +14,7 @@
   "entrypoints": {
     "main": [
       {
-        "value": "io.github.boogiemonster1o1.cartses.Cartses",
+        "value": "io.github.boogiemonster1o1.cartses.CartsesInitializer",
         "adapter": "scala"
       }
     ],

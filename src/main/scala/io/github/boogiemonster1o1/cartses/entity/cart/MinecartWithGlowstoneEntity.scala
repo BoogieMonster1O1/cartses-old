@@ -1,19 +1,17 @@
 package io.github.boogiemonster1o1.cartses.entity.cart
 
-import com.chocohead.mm.api.ClassTinkerers
 import io.github.boogiemonster1o1.cartses.entity.MinecartTypes
 import io.github.boogiemonster1o1.cartses.entity.networking.EntityUtils
-import net.minecraft.block.BlockState
-import net.minecraft.block.Blocks
+import net.minecraft.block.{BlockState, Blocks}
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.vehicle.AbstractMinecartEntity
 import net.minecraft.network.Packet
-import net.minecraft.world.GameRules
-import net.minecraft.world.World
+import net.minecraft.world.{GameRules, World}
 
 
 @SuppressWarnings(Array("EntityConstructor")) class MinecartWithGlowstoneEntity(entityType: EntityType[_], world: World) extends AbstractMinecartEntity(entityType, world) {
+
 	def this(`type`: EntityType[_], world: World, x: Double, y: Double, z: Double) {
 		this(`type`, world)
 		EntityUtils.setupPos(this, x, y, z)

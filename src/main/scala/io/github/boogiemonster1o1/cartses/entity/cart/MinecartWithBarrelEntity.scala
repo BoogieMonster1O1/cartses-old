@@ -9,11 +9,12 @@ import net.minecraft.entity.player.PlayerInventory
 import net.minecraft.entity.vehicle.{AbstractMinecartEntity, StorageMinecartEntity}
 import net.minecraft.network.Packet
 import net.minecraft.screen.{GenericContainerScreenHandler, ScreenHandler}
-import net.minecraft.util.math.{Direction, Vec3d}
+import net.minecraft.util.math.Direction
 import net.minecraft.world.{GameRules, World}
 
 @SuppressWarnings(Array("EntityConstructor")) class MinecartWithBarrelEntity(entityType: EntityType[_], world: World) extends StorageMinecartEntity(entityType, world) {
-  	def this(`type`: EntityType[_], x: Double, y: Double, z: Double, world: World) {
+
+	def this(`type`: EntityType[_], x: Double, y: Double, z: Double, world: World) {
 		this(`type`, world)
 		EntityUtils.setupPos(this, x, y, z)
 	}
@@ -28,7 +29,7 @@ import net.minecraft.world.{GameRules, World}
 
 	override def getDefaultBlockOffset = 8
 
-	override def getDefaultContainedBlock: BlockState = Blocks.BARREL.getDefaultState.`with`(BarrelBlock.FACING, Direction.UP)
+	override def getDefaultContainedBlock: BlockState = Blocks.BARREL.getDefaultState.`with`[Direction, Direction](BarrelBlock.FACING, Direction.UP)
 
 	override def dropItems(damageSource: DamageSource): Unit = {
 		super.dropItems(damageSource)

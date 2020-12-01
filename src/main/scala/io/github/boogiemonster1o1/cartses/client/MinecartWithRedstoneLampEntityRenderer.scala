@@ -8,7 +8,8 @@ import net.minecraft.util.math.BlockPos
 
 
 @Environment(EnvType.CLIENT) class MinecartWithRedstoneLampEntityRenderer(val dispatcher: EntityRenderDispatcher) extends MinecartEntityRenderer[MinecartWithRedstoneLampEntity](dispatcher) {
-	override protected def method_27950(entity: MinecartWithRedstoneLampEntity, blockPos: BlockPos): Int = if (entity.isLit) Blocks.REDSTONE_LAMP.getDefaultState.`with`(RedstoneLampBlock.LIT, true).getLuminance else super.method_27950(entity, blockPos)
 
-	override protected def getBlockLight(entity: MinecartWithRedstoneLampEntity, blockPos: BlockPos): Int = if (entity.isLit) Blocks.REDSTONE_LAMP.getDefaultState.`with`(RedstoneLampBlock.LIT, true).getLuminance else super.getBlockLight(entity, blockPos)
+	override protected def method_27950(entity: MinecartWithRedstoneLampEntity, blockPos: BlockPos): Int = if (entity.isLit) Blocks.REDSTONE_LAMP.getDefaultState.`with`[java.lang.Boolean, Boolean](RedstoneLampBlock.LIT, true).getLuminance else super.method_27950(entity, blockPos)
+
+	override protected def getBlockLight(entity: MinecartWithRedstoneLampEntity, blockPos: BlockPos): Int = if (entity.isLit) Blocks.REDSTONE_LAMP.getDefaultState.`with`[java.lang.Boolean, Boolean](RedstoneLampBlock.LIT, true).getLuminance else super.getBlockLight(entity, blockPos)
 }

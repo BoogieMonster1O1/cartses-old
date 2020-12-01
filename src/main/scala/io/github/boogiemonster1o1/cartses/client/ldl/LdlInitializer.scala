@@ -6,10 +6,11 @@ import me.lambdaurora.lambdynlights.api.{DynamicLightHandlers, DynamicLightsInit
 import net.minecraft.block.{Blocks, RedstoneLampBlock}
 
 class LdlInitializer extends DynamicLightsInitializer {
+
 	override def onInitializeDynamicLights(): Unit = {
-		DynamicLightHandlers.registerDynamicLightHandler(ModEntityTypes.MINECART_WITH_GLOWSTONE, (_: MinecartWithGlowstoneEntity) => Blocks.GLOWSTONE.getDefaultState.getLuminance)
-		DynamicLightHandlers.registerDynamicLightHandler(ModEntityTypes.MINECART_WITH_ENDER_CHEST, (_: MinecartWithEnderChestEntity) => Blocks.ENDER_CHEST.getDefaultState.getLuminance)
-		DynamicLightHandlers.registerDynamicLightHandler(ModEntityTypes.MINECART_WITH_REDSTONE_LAMP, (entity: MinecartWithRedstoneLampEntity) => {
+		DynamicLightHandlers.registerDynamicLightHandler(ModEntityTypes.minecartWithGlowstone, (_: MinecartWithGlowstoneEntity) => Blocks.GLOWSTONE.getDefaultState.getLuminance)
+		DynamicLightHandlers.registerDynamicLightHandler(ModEntityTypes.minecartWithEnderChest, (_: MinecartWithEnderChestEntity) => Blocks.ENDER_CHEST.getDefaultState.getLuminance)
+		DynamicLightHandlers.registerDynamicLightHandler(ModEntityTypes.minecartWithRedstoneLamp, (entity: MinecartWithRedstoneLampEntity) => {
 			if (entity.isLit) {
 				Blocks.REDSTONE_LAMP.getDefaultState.`with`(RedstoneLampBlock.LIT, true).getLuminance
 			}
