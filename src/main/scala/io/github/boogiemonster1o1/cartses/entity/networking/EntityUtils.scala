@@ -69,8 +69,12 @@ object EntityUtils {
 	}
 
 	def dynLightsTick(entity: Entity): Unit = {
-		if (!FabricLoader.getInstance().isModLoaded("lambdynlights")) return
+		if (!FabricLoader.getInstance.isModLoaded("lambdynlights")) return
 		if (!entity.world.isClient) return
+		internalDynLightsTick(entity)
+	}
+
+	private def internalDynLightsTick(entity: Entity): Unit ={
 		val source: DynamicLightSource = entity.asInstanceOf[DynamicLightSource]
 		if (entity.removed) source.setDynamicLightEnabled(false)
 		else {
