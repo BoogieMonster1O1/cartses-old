@@ -29,7 +29,6 @@ import net.minecraft.world.{GameRules, World}
 
 
 @SuppressWarnings(Array("EntityConstructor")) class MinecartWithGlowstoneEntity(entityType: EntityType[_], world: World) extends AbstractMinecartEntity(entityType, world) {
-
 	def this(`type`: EntityType[_], world: World, x: Double, y: Double, z: Double) {
 		this(`type`, world)
 		EntityUtils.setupPos(this, x, y, z)
@@ -40,7 +39,6 @@ import net.minecraft.world.{GameRules, World}
 	override def createSpawnPacket: Packet[_] = EntityUtils.createPacket(this)
 
 	override def getMinecartType: AbstractMinecartEntity.Type = MinecartTypes.glowstone
-
 
 	override def tick(): Unit = {
 		super.tick()

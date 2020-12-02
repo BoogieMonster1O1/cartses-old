@@ -31,8 +31,7 @@ import net.minecraft.util.math.{BlockPos, MathHelper}
 import net.minecraft.world.{GameRules, World}
 
 object MinecartWithRedstoneLampEntity {
-
-	private val LIT = DataTracker.registerData(classOf[MinecartWithRedstoneLampEntity], TrackedDataHandlerRegistry.BOOLEAN)
+	private val lit = DataTracker.registerData(classOf[MinecartWithRedstoneLampEntity], TrackedDataHandlerRegistry.BOOLEAN)
 }
 
 @SuppressWarnings(Array("EntityConstructor"))
@@ -59,14 +58,14 @@ class MinecartWithRedstoneLampEntity(entityType: EntityType[_], world: World) ex
 
 	override protected def initDataTracker(): Unit = {
 		super.initDataTracker()
-		this.dataTracker.startTracking[java.lang.Boolean](MinecartWithRedstoneLampEntity.LIT, false)
+		this.dataTracker.startTracking[java.lang.Boolean](MinecartWithRedstoneLampEntity.lit, false)
 	}
 
 	def setLit(value: Boolean): Unit = {
-		this.dataTracker.set[java.lang.Boolean](MinecartWithRedstoneLampEntity.LIT, value)
+		this.dataTracker.set[java.lang.Boolean](MinecartWithRedstoneLampEntity.lit, value)
 	}
 
-	def isLit: Boolean = this.dataTracker.get(MinecartWithRedstoneLampEntity.LIT)
+	def isLit: Boolean = this.dataTracker.get(MinecartWithRedstoneLampEntity.lit)
 
 	override def getContainedBlock: BlockState = {
 		val state = Blocks.REDSTONE_LAMP.getDefaultState

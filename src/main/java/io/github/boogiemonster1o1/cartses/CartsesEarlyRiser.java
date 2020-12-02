@@ -29,6 +29,6 @@ public class CartsesEarlyRiser implements Runnable {
 	public void run() {
 		MappingResolver mappingResolver = FabricLoader.getInstance().getMappingResolver();
 		String minecartTypeName = mappingResolver.mapClassName("intermediary", "net.minecraft.class_1688$class_1689");
-		ClassTinkerers.enumBuilder(minecartTypeName, new String[0]).addEnum("CRAFTING_TABLE").addEnum("GLOWSTONE").addEnum("REDSTONE_LAMP").addEnum("BARREL").addEnum("ENDER_CHEST").build();
+		ClassTinkerers.enumBuilder(minecartTypeName, new String[0]).addEnum("CRAFTING_TABLE").addEnum("GLOWSTONE").addEnum("REDSTONE_LAMP").addEnum("BARREL").addEnum("ENDER_CHEST").addEnum("NOTE_BLOCK").build();
 	}
 }

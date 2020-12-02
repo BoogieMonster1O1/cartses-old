@@ -19,7 +19,7 @@
 package io.github.boogiemonster1o1.cartses.entity.networking
 
 import io.github.boogiemonster1o1.cartses.Cartses
-import io.github.boogiemonster1o1.cartses.entity.cart._
+import io.github.boogiemonster1o1.cartses.entity.cart.{MinecartWithBarrelEntity, MinecartWithCraftingTableEntity, MinecartWithEnderChestEntity, MinecartWithGlowstoneEntity, MinecartWithNoteBlockEntity, MinecartWithRedstoneLampEntity}
 import io.github.boogiemonster1o1.cartses.entity.{MinecartTypes, ModEntityTypes}
 import io.netty.buffer.Unpooled
 import me.lambdaurora.lambdynlights.{DynamicLightSource, LambDynLights}
@@ -66,6 +66,7 @@ object EntityUtils {
 		else if (entityType eq MinecartTypes.glowstone) cir.setReturnValue(new MinecartWithGlowstoneEntity(ModEntityTypes.minecartWithGlowstone, world, x, y, z))
 		else if (entityType eq MinecartTypes.redstoneLamp) cir.setReturnValue(new MinecartWithRedstoneLampEntity(ModEntityTypes.minecartWithRedstoneLamp, world, x, y, z))
 		else if (entityType eq MinecartTypes.enderChest) cir.setReturnValue(new MinecartWithEnderChestEntity(ModEntityTypes.minecartWithEnderChest, world, x, y, z))
+		else if (entityType eq MinecartTypes.noteBlock) cir.setReturnValue(new MinecartWithNoteBlockEntity(ModEntityTypes.noteBlock, world, x, y, z))
 	}
 
 	def dynLightsTick(entity: Entity): Unit = {

@@ -19,7 +19,7 @@
 package io.github.boogiemonster1o1.cartses.entity
 
 import io.github.boogiemonster1o1.cartses.Cartses
-import io.github.boogiemonster1o1.cartses.entity.cart.{MinecartWithBarrelEntity, MinecartWithCraftingTableEntity, MinecartWithEnderChestEntity, MinecartWithGlowstoneEntity, MinecartWithRedstoneLampEntity}
+import io.github.boogiemonster1o1.cartses.entity.cart.{MinecartWithBarrelEntity, MinecartWithCraftingTableEntity, MinecartWithEnderChestEntity, MinecartWithGlowstoneEntity, MinecartWithNoteBlockEntity, MinecartWithRedstoneLampEntity}
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.minecraft.entity.{EntityDimensions, EntityType}
 import net.minecraft.util.Identifier
@@ -27,7 +27,6 @@ import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
 object ModEntityTypes {
-
 	val minecartWithCraftingTable: EntityType[MinecartWithCraftingTableEntity] = FabricEntityTypeBuilder.create[MinecartWithCraftingTableEntity].entityFactory((entityType: EntityType[_], world: World) => new MinecartWithCraftingTableEntity(entityType, world)).dimensions(EntityDimensions.fixed(0.98F, 0.7F)).trackRangeChunks(8).build
 
 	val minecartWithBarrel: EntityType[MinecartWithBarrelEntity] = FabricEntityTypeBuilder.create[MinecartWithBarrelEntity].entityFactory((entityType: EntityType[_], world: World) => new MinecartWithBarrelEntity(entityType, world)).dimensions(EntityDimensions.fixed(0.98F, 0.7F)).trackRangeChunks(8).build
@@ -38,12 +37,15 @@ object ModEntityTypes {
 
 	val minecartWithEnderChest: EntityType[MinecartWithEnderChestEntity] = FabricEntityTypeBuilder.create[MinecartWithEnderChestEntity].entityFactory((entityType: EntityType[_], world: World) => new MinecartWithEnderChestEntity(entityType, world)).dimensions(EntityDimensions.fixed(0.98F, 0.7F)).trackRangeChunks(8).build
 
+	val minecartWithNoteBlock: EntityType[MinecartWithNoteBlockEntity] = FabricEntityTypeBuilder.create[MinecartWithNoteBlockEntity].entityFactory((entityType: EntityType[_], world: World) => new MinecartWithNoteBlockEntity(entityType, world)).dimensions(EntityDimensions.fixed(0.98F, 0.7F)).trackRangeChunks(8).build
+
 	def init(): Unit = {
 		register(minecartWithCraftingTable, "minecart_with_crafting_table")
 		register(minecartWithBarrel, "minecart_with_barrel")
 		register(minecartWithGlowstone, "minecart_with_glowstone")
 		register(minecartWithRedstoneLamp, "minecart_with_redstone_lamp")
 		register(minecartWithEnderChest, "minecart_with_ender_chest")
+		register(minecartWithNoteBlock, "minecart_with_note_block")
 	}
 
 	private def register(entityType: EntityType[_], name: String): Unit = {

@@ -36,12 +36,15 @@ object ModItems {
 
 	val minecartWithEnderChest = new MinecartItem(MinecartTypes.enderChest, new Item.Settings().group(ItemGroup.TRANSPORTATION))
 
+	val minecartWithNoteBlock = new MinecartItem(MinecartTypes.noteBlock, new Item.Settings().group(ItemGroup.TRANSPORTATION))
+
 	def init(): Unit = {
 		register("minecart_with_crafting_table", minecartWithCraftingTable)
 		register("minecart_with_barrel", minecartWithBarrel)
 		register("minecart_with_glowstone", minecartWithGlowstone)
 		register("minecart_with_redstone_lamp", minecartWithRedstoneLamp)
 		register("minecart_with_ender_chest", minecartWithEnderChest)
+		register("minecart_with_note_block", minecartWithNoteBlock)
 	}
 
 	private def register(name: String, item: Item): Unit = {
