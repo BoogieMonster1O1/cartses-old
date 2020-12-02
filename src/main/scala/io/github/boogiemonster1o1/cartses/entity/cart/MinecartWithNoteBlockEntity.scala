@@ -31,6 +31,7 @@ import net.minecraft.entity.vehicle.AbstractMinecartEntity
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.{Packet, PacketByteBuf}
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.{ActionResult, Hand}
 import net.minecraft.util.math.{BlockPos, MathHelper}
@@ -89,7 +90,7 @@ class MinecartWithNoteBlockEntity(entityType: EntityType[_], world: World) exten
 		val note: Int = getNote
 		val pitch: Float = Math.pow(2.0D, (note - 12).toDouble / 12.0D).toFloat
 		world.playSound(null, getBlockPos, Instrument.fromBlockState(blockState).getSound, SoundCategory.RECORDS, 3.0F, pitch)
-		world.addParticle(null, ParticleTypes.NOTE, this.getX, this.getY + 1.7, this.getZ, note / 24.0F, 0, 0)
+		this.world.asInstanceOf[ServerWorld].spawnParticles(ParticleTypes.NOTE, this.getX, this.getY + 1.7, this.getZ, 0, note / 24.0F, 0, 0, 1)
 	}
 
 	override def interact(player: PlayerEntity, hand: Hand): ActionResult = {
@@ -99,7 +100,7 @@ class MinecartWithNoteBlockEntity(entityType: EntityType[_], world: World) exten
 			buf.writeVarInt(getEntityId)
 			ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, EntityUtils.openNbScreenS2CId, buf)
 		}
-		ActionResult.success(world.isClient)
+		ActionResult.SUCCESS
 	}
 
 	override def createSpawnPacket: Packet[_] = EntityUtils.createPacket(this)
