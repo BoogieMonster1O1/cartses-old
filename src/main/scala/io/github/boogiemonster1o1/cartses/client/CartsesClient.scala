@@ -39,11 +39,12 @@ object CartsesClient extends ClientModInitializer {
 	override def onInitializeClient(): Unit = {
 		ClientSidePacketRegistry.INSTANCE.register(EntityUtils.entityPacketS2CId, onEntityPacket)
 		ClientSidePacketRegistry.INSTANCE.register(EntityUtils.openNbScreenS2CId, openNbScreen)
-		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithCraftingTable, (dispatcher: EntityRenderDispatcher, ctx: EntityRendererRegistry.Context) => new MinecartEntityRenderer[MinecartWithCraftingTableEntity](dispatcher))
-		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithBarrel, (dispatcher: EntityRenderDispatcher, ctx: EntityRendererRegistry.Context) => new MinecartEntityRenderer[MinecartWithBarrelEntity](dispatcher))
-		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithGlowstone, (dispatcher: EntityRenderDispatcher, ctx: EntityRendererRegistry.Context) => new MinecartWithGlowstoneEntityRenderer(dispatcher))
-		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithRedstoneLamp, (dispatcher: EntityRenderDispatcher, ctx: EntityRendererRegistry.Context) => new MinecartWithRedstoneLampEntityRenderer(dispatcher))
-		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithEnderChest, (dispatcher: EntityRenderDispatcher, ctx: EntityRendererRegistry.Context) => new MinecartWithEnderChestEntityRenderer(dispatcher))
+		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithCraftingTable, (dispatcher: EntityRenderDispatcher, _: EntityRendererRegistry.Context) => new MinecartEntityRenderer[MinecartWithCraftingTableEntity](dispatcher))
+		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithBarrel, (dispatcher: EntityRenderDispatcher, _: EntityRendererRegistry.Context) => new MinecartEntityRenderer[MinecartWithBarrelEntity](dispatcher))
+		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithGlowstone, (dispatcher: EntityRenderDispatcher, _: EntityRendererRegistry.Context) => new MinecartWithGlowstoneEntityRenderer(dispatcher))
+		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithRedstoneLamp, (dispatcher: EntityRenderDispatcher, _: EntityRendererRegistry.Context) => new MinecartWithRedstoneLampEntityRenderer(dispatcher))
+		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithEnderChest, (dispatcher: EntityRenderDispatcher, _: EntityRendererRegistry.Context) => new MinecartWithEnderChestEntityRenderer(dispatcher))
+		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithNoteBlock, (dispatcher: EntityRenderDispatcher, _: EntityRendererRegistry.Context) => new MinecartEntityRenderer[MinecartWithNoteBlockEntity](dispatcher))
 	}
 
 	private def onEntityPacket(context: PacketContext, byteBuf: PacketByteBuf): Unit = {
