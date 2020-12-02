@@ -10,7 +10,8 @@ import net.minecraft.entity.EntityType
 import net.minecraft.entity.data.{DataTracker, TrackedDataHandlerRegistry}
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.entity.vehicle.AbstractMinecartEntity
-import net.minecraft.network.PacketByteBuf
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.network.{Packet, PacketByteBuf}
 import net.minecraft.particle.ParticleTypes
 import net.minecraft.sound.SoundCategory
 import net.minecraft.util.{ActionResult, Hand}
@@ -30,28 +31,40 @@ class MinecartWithNoteBlockEntity(entityType: EntityType[_], world: World) exten
 		EntityUtils.setupPos(this, x, y, z)
 	}
 
+	override def readCustomDataFromTag(tag: CompoundTag): Unit = {
+		setNote(tag.getInt("Note"))
+		setRepeat(tag.getBoolean("Repeat"))
+		super.readCustomDataFromTag(tag)
+	}
+
+	override def writeCustomDataToTag(tag: CompoundTag): Unit = {
+		tag.putInt("Note", getNote)
+		tag.putBoolean("Repeat", isRepeat)
+		super.writeCustomDataToTag(tag)
+	}
+
 	override def getMinecartType: AbstractMinecartEntity.Type = MinecartTypes.noteBlock
 
 	override def initDataTracker(): Unit = {
 		super.initDataTracker()
-		dataTracker.startTracking(MinecartWithNoteBlockEntity.note, 0)
-		dataTracker.startTracking(MinecartWithNoteBlockEntity.repeat, false)
+		dataTracker.startTracking[Integer](MinecartWithNoteBlockEntity.note, 0)
+		dataTracker.startTracking[java.lang.Boolean](MinecartWithNoteBlockEntity.repeat, false)
 	}
 
 	def getNote: Int = {
-		dataTracker.get(MinecartWithNoteBlockEntity.note)
+		dataTracker.get[Integer](MinecartWithNoteBlockEntity.note)
 	}
 
 	def setNote(value: Int): Unit = {
-		dataTracker.set(MinecartWithNoteBlockEntity.note, MathHelper.clamp(value, 0, 0))
+		dataTracker.set[Integer](MinecartWithNoteBlockEntity.note, MathHelper.clamp(value, 0, 0))
 	}
 
 	def isRepeat: Boolean = {
-		dataTracker.get(MinecartWithNoteBlockEntity.repeat)
+		dataTracker.get[java.lang.Boolean](MinecartWithNoteBlockEntity.repeat)
 	}
 
 	def setRepeat(value: Boolean): Unit = {
-		dataTracker.set(MinecartWithNoteBlockEntity.repeat, value)
+		dataTracker.set[java.lang.Boolean](MinecartWithNoteBlockEntity.repeat, value)
 	}
 
 	def playSound(blockState: BlockState): Unit = {
@@ -63,18 +76,27 @@ class MinecartWithNoteBlockEntity(entityType: EntityType[_], world: World) exten
 
 	override def interact(player: PlayerEntity, hand: Hand): ActionResult = {
 		if (!player.isSneaking) return super.interact(player, hand)
-		val buf: PacketByteBuf = new PacketByteBuf(Unpooled.buffer)
-		buf.writeVarInt(getEntityId)
-		ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, EntityUtils.openNbScreenS2CId, buf)
-		ActionResult.SUCCESS
+		if (!world.isClient) {
+			val buf: PacketByteBuf = new PacketByteBuf(Unpooled.buffer)
+			buf.writeVarInt(getEntityId)
+			ServerSidePacketRegistry.INSTANCE.sendToPlayer(player, EntityUtils.openNbScreenS2CId, buf)
+		}
+		ActionResult.success(world.isClient)
 	}
 
-	override def getContainedBlock: BlockState = Blocks.NOTE_BLOCK.getDefaultState.`with`(NoteBlock.NOTE, getNote).`with`(NoteBlock.INSTRUMENT, getInstrument)
+	override def createSpawnPacket: Packet[_] = EntityUtils.createPacket(this)
+
+	override def getContainedBlock: BlockState = Blocks.NOTE_BLOCK.getDefaultState.`with`[Integer, Integer](NoteBlock.NOTE, getNote)
 
 	override def onActivatorRail(x: Int, y: Int, z: Int, powered: Boolean): Unit = {
 		val pos: BlockPos = new BlockPos(x, y - 1, z)
-		if (isRepeat) playSound(world.getBlockState(pos))
-		else if (!pos.equals(cachedPos)) playSound(world.getBlockState(pos))
+		if (!world.isClient) {
+			if (isRepeat) playSound(world.getBlockState(pos))
+			else if (!pos.equals(cachedPos)) {
+				playSound(world.getBlockState(pos))
+				cachedPos = pos
+			}
+		}
 		super.onActivatorRail(x, y, z, powered)
 	}
 }

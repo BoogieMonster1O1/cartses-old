@@ -48,7 +48,7 @@ class Note(val value: Int, val title: Text) extends Iterator[Note] {
 	override def hasNext: Boolean = true
 
 	override def next: Note = {
-		if (value eq 3) return ids.get(0)
+		if (value == 3) return ids.get(0)
 		ids.get(value)
 	}
 }

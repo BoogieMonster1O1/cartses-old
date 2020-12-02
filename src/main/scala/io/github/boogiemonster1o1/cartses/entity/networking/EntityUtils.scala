@@ -68,7 +68,7 @@ object EntityUtils {
 		else if (entityType eq MinecartTypes.glowstone) cir.setReturnValue(new MinecartWithGlowstoneEntity(ModEntityTypes.minecartWithGlowstone, world, x, y, z))
 		else if (entityType eq MinecartTypes.redstoneLamp) cir.setReturnValue(new MinecartWithRedstoneLampEntity(ModEntityTypes.minecartWithRedstoneLamp, world, x, y, z))
 		else if (entityType eq MinecartTypes.enderChest) cir.setReturnValue(new MinecartWithEnderChestEntity(ModEntityTypes.minecartWithEnderChest, world, x, y, z))
-		else if (entityType eq MinecartTypes.noteBlock) cir.setReturnValue(new MinecartWithNoteBlockEntity(ModEntityTypes.noteBlock, world, x, y, z))
+		else if (entityType eq MinecartTypes.noteBlock) cir.setReturnValue(new MinecartWithNoteBlockEntity(ModEntityTypes.minecartWithNoteBlock, world, x, y, z))
 	}
 
 	def dynLightsTick(entity: Entity): Unit = {

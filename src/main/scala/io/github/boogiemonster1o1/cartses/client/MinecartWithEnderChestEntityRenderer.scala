@@ -26,7 +26,6 @@ import net.minecraft.util.math.BlockPos
 
 
 @Environment(EnvType.CLIENT) class MinecartWithEnderChestEntityRenderer(val entityRenderDispatcher: EntityRenderDispatcher) extends MinecartEntityRenderer[MinecartWithEnderChestEntity](entityRenderDispatcher) {
-
 	override protected def method_27950(entity: MinecartWithEnderChestEntity, blockPos: BlockPos): Int = Math.max(Blocks.ENDER_CHEST.getDefaultState.getLuminance, super.method_27950(entity, blockPos))
 
 	override protected def getBlockLight(entity: MinecartWithEnderChestEntity, blockPos: BlockPos): Int = Math.max(Blocks.ENDER_CHEST.getDefaultState.getLuminance, super.getBlockLight(entity, blockPos))

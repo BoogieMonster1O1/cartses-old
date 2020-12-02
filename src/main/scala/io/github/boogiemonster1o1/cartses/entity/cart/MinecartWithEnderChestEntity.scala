@@ -44,7 +44,6 @@ import net.minecraft.world.{GameRules, World}
 
 	override def getContainedBlock: BlockState = Blocks.ENDER_CHEST.getDefaultState
 
-
 	override def tick(): Unit = {
 		super.tick()
 		EntityUtils.dynLightsTick(this)
