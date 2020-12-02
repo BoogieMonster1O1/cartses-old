@@ -20,9 +20,11 @@ package io.github.boogiemonster1o1.cartses.client
 
 import java.util.Objects
 
+import io.github.boogiemonster1o1.cartses.Cartses
 import io.github.boogiemonster1o1.cartses.entity.ModEntityTypes
-import io.github.boogiemonster1o1.cartses.entity.cart.{MinecartWithBarrelEntity, MinecartWithCraftingTableEntity}
+import io.github.boogiemonster1o1.cartses.entity.cart.{MinecartWithBarrelEntity, MinecartWithCraftingTableEntity, MinecartWithNoteBlockEntity}
 import io.github.boogiemonster1o1.cartses.entity.networking.EntityUtils
+import io.github.boogiemonster1o1.cartses.screen.client.{NoteBlockDescription, NoteBlockScreen}
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry
 import net.fabricmc.fabric.api.network.{ClientSidePacketRegistry, PacketContext}
@@ -30,11 +32,13 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.entity.{EntityRenderDispatcher, MinecartEntityRenderer}
 import net.minecraft.entity.Entity
 import net.minecraft.network.PacketByteBuf
+import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 object CartsesClient extends ClientModInitializer {
 	override def onInitializeClient(): Unit = {
-		ClientSidePacketRegistry.INSTANCE.register(EntityUtils.packetId, onPacket)
+		ClientSidePacketRegistry.INSTANCE.register(EntityUtils.entityPacketS2CId, onEntityPacket)
+		ClientSidePacketRegistry.INSTANCE.register(EntityUtils.openNbScreenS2CId, openNbScreen)
 		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithCraftingTable, (dispatcher: EntityRenderDispatcher, ctx: EntityRendererRegistry.Context) => new MinecartEntityRenderer[MinecartWithCraftingTableEntity](dispatcher))
 		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithBarrel, (dispatcher: EntityRenderDispatcher, ctx: EntityRendererRegistry.Context) => new MinecartEntityRenderer[MinecartWithBarrelEntity](dispatcher))
 		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithGlowstone, (dispatcher: EntityRenderDispatcher, ctx: EntityRendererRegistry.Context) => new MinecartWithGlowstoneEntityRenderer(dispatcher))
@@ -42,7 +46,7 @@ object CartsesClient extends ClientModInitializer {
 		EntityRendererRegistry.INSTANCE.register(ModEntityTypes.minecartWithEnderChest, (dispatcher: EntityRenderDispatcher, ctx: EntityRendererRegistry.Context) => new MinecartWithEnderChestEntityRenderer(dispatcher))
 	}
 
-	private def onPacket(context: PacketContext, byteBuf: PacketByteBuf): Unit = {
+	private def onEntityPacket(context: PacketContext, byteBuf: PacketByteBuf): Unit = {
 		val `type` = Registry.ENTITY_TYPE.get(byteBuf.readVarInt)
 		val entityUUID = byteBuf.readUuid
 		val entityID = byteBuf.readVarInt
@@ -63,6 +67,13 @@ object CartsesClient extends ClientModInitializer {
 				entity.setUuid(entityUUID)
 				Objects.requireNonNull(world).addEntity(entityID, entity)
 			}
+		})
+	}
+
+	private def openNbScreen(context: PacketContext, byteBuf: PacketByteBuf): Unit = {
+		val entitySyncId = byteBuf.readVarInt()
+		context.getTaskQueue.execute(() => {
+			MinecraftClient.getInstance.openScreen(new NoteBlockScreen(entitySyncId, new NoteBlockDescription(MinecraftClient.getInstance.world.getEntityById(entitySyncId).asInstanceOf[MinecartWithNoteBlockEntity])))
 		})
 	}
 }

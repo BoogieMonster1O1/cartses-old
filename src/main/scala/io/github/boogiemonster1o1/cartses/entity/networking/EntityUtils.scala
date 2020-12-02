@@ -35,7 +35,9 @@ import net.minecraft.world.World
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable
 
 object EntityUtils {
-	val packetId: Identifier = new Identifier(Cartses.modId, "spawn_entity")
+	val entityPacketS2CId: Identifier = new Identifier(Cartses.modId, "spawn_entity")
+	val openNbScreenS2CId: Identifier = new Identifier(Cartses.modId, "open_nb_screen")
+	val updateScreenC2SId: Identifier = new Identifier(Cartses.modId, "update_nb_entity")
 
 	def createPacket(entity: Entity): Packet[_] = {
 		val buf = new PacketByteBuf(Unpooled.buffer)
@@ -49,7 +51,7 @@ object EntityUtils {
 		buf.writeByte(MathHelper.floor(entity.yaw * 256.0F / 360.0F))
 		buf.writeFloat(entity.pitch)
 		buf.writeFloat(entity.yaw)
-		ServerSidePacketRegistry.INSTANCE.toPacket(packetId, buf)
+		ServerSidePacketRegistry.INSTANCE.toPacket(entityPacketS2CId, buf)
 	}
 
 	def setupPos(entity: Entity, x: Double, y: Double, z: Double): Unit = {

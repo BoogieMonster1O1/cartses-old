@@ -39,6 +39,7 @@ object Note {
 }
 
 class Note(val value: Int, val title: Text) extends Iterator[Note] {
+	ids.add(this)
 
 	def asFloat: Float = {
 		Math.pow(2, (value - 12) / 12.0).asInstanceOf[Float]

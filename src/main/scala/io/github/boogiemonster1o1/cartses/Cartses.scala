@@ -19,8 +19,12 @@
 package io.github.boogiemonster1o1.cartses
 
 import io.github.boogiemonster1o1.cartses.entity.ModEntityTypes
+import io.github.boogiemonster1o1.cartses.entity.cart.MinecartWithNoteBlockEntity
+import io.github.boogiemonster1o1.cartses.entity.networking.EntityUtils
 import io.github.boogiemonster1o1.cartses.item.ModItems
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.network.{PacketContext, ServerSidePacketRegistry}
+import net.minecraft.network.PacketByteBuf
 import org.apache.logging.log4j.{Level, LogManager, Logger}
 
 object Cartses extends ModInitializer {
@@ -28,6 +32,16 @@ object Cartses extends ModInitializer {
 		log(Level.INFO, "Initializing Cartses")
 		ModEntityTypes.init()
 		ModItems.init()
+		ServerSidePacketRegistry.INSTANCE.register(EntityUtils.updateScreenC2SId, (ctx: PacketContext, buf: PacketByteBuf) => {
+			val entitySyncId: Int = buf.readVarInt()
+			val note: Int = buf.readVarInt()
+			val repeat: Boolean = buf.readBoolean()
+			ctx.getTaskQueue.execute(() => {
+				val entity: MinecartWithNoteBlockEntity = ctx.getPlayer.world.getEntityById(entitySyncId).asInstanceOf[MinecartWithNoteBlockEntity]
+				entity.setNote(note)
+				entity.setRepeat(repeat)
+			})
+		})
 	}
 
 	val modId = "cartses"
