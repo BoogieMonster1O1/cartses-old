@@ -4,6 +4,7 @@ plugins {
 	id 'fabric-loom' version '0.5-SNAPSHOT'
 	id 'maven-publish'
 	id 'net.minecrell.licenser' version '0.4.1'
+	id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -59,21 +60,17 @@ sourceSets {
 processResources {
 	inputs.property "version", project.version
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
+	filesMatching("fabric.mod.json") {
 		expand "version": project.version
-	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
 	}
 }
 
-// ensure that the encoding is set to UTF-8, no matter what the system default is
-// this fixes some edge cases with special characters not displaying correctly
-// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
+tasks.withType(JavaCompile).configureEach {
+	// ensure that the encoding is set to UTF-8, no matter what the system default is
+	// this fixes some edge cases with special characters not displaying correctly
+	// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+	// If Javadoc is generated, this must be specified in that task too.
+	it.options.encoding = "UTF-8"
 }
 
 // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
@@ -85,7 +82,9 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 }
 
 jar {
-	from "LICENSE"
+	from("LICENSE") {
+		rename { "${it}_${archivesBaseName}"}
+	}
 }
 
 license {
@@ -95,6 +94,34 @@ license {
 }
 
 tasks.build.dependsOn("licenseFormat")
+
+curseforge {
+	if (project.hasProperty('curse_api_key')) {
+		apiKey = project.getProperty('curse_api_key')
+	}
+	project {
+		id = '423880'
+		def changelogFile = rootProject.file('changelog.txt')
+		if (changelogFile.exists()) {
+			changelog = changelogFile.getText('UTF-8')
+		} else {
+			changelog = 'A changelog can be found at https://github.com/BoogieMonster1O1/cartses/commits'
+		}
+		releaseType = 'alpha'
+		addGameVersion '1.16.2'
+		addGameVersion '1.16.4'
+		addGameVersion 'Fabric'
+		mainArtifact(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar")) {
+			displayName = "[${project.minecraft_version}] Cartses ${version}"
+		}
+		afterEvaluate {
+			uploadTask.dependsOn("remapJar")
+		}
+	}
+	options {
+		forgeGradleIntegration = false
+	}
+}
 
 // configure the maven publication
 publishing {
