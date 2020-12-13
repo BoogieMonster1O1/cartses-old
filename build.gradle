@@ -1,3 +1,9 @@
+buildscript {
+	dependencies {
+		classpath 'org.kohsuke:github-api:1.114'
+	}
+}
+
 plugins {
 	id 'java'
 	id 'scala'
@@ -46,17 +52,6 @@ dependencies {
 	}
 }
 
-sourceSets {
-	main {
-		java {
-			srcDirs = []
-		}
-		scala {
-			srcDirs = ['src/main/scala', 'src/main/java']
-		}
-	}
-}
-
 processResources {
 	inputs.property "version", project.version
 
@@ -93,7 +88,45 @@ license {
 	include '**/*.java'
 }
 
+sourceSets {
+	main {
+		java {
+			srcDirs = []
+		}
+		scala {
+			srcDirs = ['src/main/scala', 'src/main/java']
+		}
+	}
+}
+
 tasks.build.dependsOn("licenseFormat")
+
+import org.kohsuke.github.GHReleaseBuilder
+import org.kohsuke.github.GitHub
+
+task github(dependsOn: remapJar) {
+	onlyIf {
+		project.hasProperty("github_api_key")
+	}
+
+	doLast {
+		def github = GitHub.connectUsingOAuth("https://github.com/BoogieMonster1O1/cartses")
+		def repository = github.getRepository(project.getProperty("github_api_key"))
+
+		def releaseBuilder = new GHReleaseBuilder(repository, version as String)
+		releaseBuilder.name("[${project.minecraft_version}] Cartses ${version}")
+		def changelogFile = rootProject.file('changelog.txt')
+		if (changelogFile.exists()) {
+			releaseBuilder.body(changelogFile.getText('UTF-8'))
+		} else {
+			releaseBuilder.body('A changelog can be found at A changelog can be found at https://github.com/BoogieMonster1O1/cartses/commits')
+		}
+		releaseBuilder.commitish("master")
+
+		def ghRelease = releaseBuilder.create()
+		ghRelease.uploadAsset(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"), "application/java-archive")
+	}
+}
 
 curseforge {
 	if (project.hasProperty('curse_api_key')) {
