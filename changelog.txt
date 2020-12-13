@@ -1,0 +1,6 @@
+- Added Minecart with Barrel (no texture yet)
+- Added Minecart with Crafting table
+- Added Minecart with Ender Chest
+- Added Minecart with Glowstone
+- Added Minecart with Note block (very broken)
+- Added Minecart with Redstone lamp (no texture yet)
